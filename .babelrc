@@ -1,0 +1,23 @@
+{
+  "plugins": [
+    "@babel/plugin-transform-runtime",
+    "@babel/plugin-proposal-class-properties",
+    "@emotion"
+  ],
+  "presets": [
+    "next/babel",
+    [
+      "@babel/env",
+      {
+        "shippedProposals": true
+      }
+    ],
+    [
+      "@babel/react",
+      {
+        "runtime": "automatic",
+        "importSource": "@emotion/react"
+      }
+    ]
+  ]
+}
