@@ -22,7 +22,7 @@ const MsgItem = ({
   startEdit: () => void;
   onDelete: () => void;
 }) => (
-  <li className="messages__item">
+  <li>
     <h3>
       {user.nickname}{' '}
       <sub>
@@ -46,9 +46,13 @@ const MsgItem = ({
     )}
 
     {myId === user.id && (
-      <div className="messages__buttons">
-        <button onClick={startEdit}>수정</button>
-        <button onClick={onDelete}>삭제</button>
+      <div>
+        <button type="button" onClick={startEdit}>
+          수정
+        </button>
+        <button type="button" onClick={onDelete}>
+          삭제
+        </button>
       </div>
     )}
   </li>

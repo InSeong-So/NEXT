@@ -2,7 +2,7 @@ import { v4 } from 'uuid';
 import { writeDB } from '../dbController';
 import { DBField, Message, Resolver } from '../types';
 
-const setMsgs = (data: Message[]) => writeDB(DBField.MESSAGES, data);
+const setMessages = (data: Message[]) => writeDB(DBField.MESSAGES, data);
 
 const messageResolver: Resolver = {
   Query: {
@@ -24,7 +24,7 @@ const messageResolver: Resolver = {
         timestamp: Date.now(),
       };
       db.messages.unshift(newMsg);
-      setMsgs(db.messages);
+      setMessages(db.messages);
       return newMsg;
     },
     updateMessage: (parent, { id, text, userId }, { db }) => {
@@ -34,15 +34,17 @@ const messageResolver: Resolver = {
 
       const newMsg = { ...db.messages[targetIndex], text };
       db.messages.splice(targetIndex, 1, newMsg);
-      setMsgs(db.messages);
+      setMessages(db.messages);
       return newMsg;
     },
     deleteMessage: (parent, { id, userId }, { db }) => {
       const targetIndex = db.messages.findIndex((msg) => msg.id === id);
+      // eslint-disable-next-line no-throw-literal
       if (targetIndex < 0) throw '메시지가 없습니다.';
+      // eslint-disable-next-line no-throw-literal
       if (db.messages[targetIndex].userId !== userId) throw '사용자가 다릅니다.';
       db.messages.splice(targetIndex, 1);
-      setMsgs(db.messages);
+      setMessages(db.messages);
       return id;
     },
   },

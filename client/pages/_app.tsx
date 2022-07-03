@@ -1,7 +1,6 @@
 import { AppContext, AppProps } from 'next/app';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Hydrate } from 'react-query/hydration';
-import './index.scss';
 
 const App = ({ Component, pageProps }: AppProps) => {
   const queryClient = new QueryClient({
