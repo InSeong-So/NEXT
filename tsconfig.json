@@ -20,9 +20,7 @@
     "incremental": true,
     "composite": true,
     "types": [
-      "jest",
       "node",
-      "@testing-library/jest-dom"
     ],
     "baseUrl": ".",
     "paths": {
@@ -39,7 +37,6 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "jest.setup.ts"
   ],
   "exclude": [
     "node_modules"

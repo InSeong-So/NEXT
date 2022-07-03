@@ -9,13 +9,26 @@ module.exports = {
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:storybook/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
   ],
-  plugins: ['@typescript-eslint', 'react-hooks', '@emotion', 'testing-library'],
+  plugins: ['@typescript-eslint', 'react-hooks', '@emotion'],
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 12,
+    sourceType: 'module',
+    project: ['tsconfig.json', './server/tsconfig.json', './client/tsconfig.json'],
+  },
   // common rules
   rules: {
     // typescript
     '@typescript-eslint/restrict-template-expressions': 'off',
     '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-unsafe-call': 'off',
+    '@typescript-eslint/no-unsafe-return': 'off',
+    '@typescript-eslint/no-unsafe-argument': 'off',
+    '@typescript-eslint/no-unsafe-assignment': 'off',
+    '@typescript-eslint/no-unsafe-member-access': 'off',
     // next
     '@next/next/no-html-link-for-pages': 'off',
     // react
@@ -29,6 +42,9 @@ module.exports = {
     'react/jsx-filename-extension': 0,
     'react/function-component-definition': 'off',
     'max-len': 'off',
+    'no-void': 'off',
+    'function-paren-newline': 'off',
+    'consistent-return': 'off',
     // 'jsx-a11y/label-has-associated-control': ['error', { controlComponents: ['input', 'select'] }],
     // import options
     'sort-imports': 'off',
@@ -50,42 +66,6 @@ module.exports = {
     'implicit-arrow-linebreak': 'off',
     'operator-linebreak': 'off',
   },
-  // special rules
-  overrides: [
-    {
-      files: ['**/*.ts?(x)'],
-      parser: '@typescript-eslint/parser',
-      extends: [
-        'plugin:@typescript-eslint/recommended',
-        'plugin:@typescript-eslint/recommended-requiring-type-checking',
-      ],
-      rules: {
-        'no-use-before-define': 'off',
-        'no-useless-constructor': 'off',
-        'react/prop-types': 'off',
-        'react/require-default-props': 'off',
-        '@typescript-eslint/explicit-module-boundary-types': 'off',
-        '@typescript-eslint/no-use-before-define': ['error', { variables: false }],
-        '@typescript-eslint/no-useless-constructor': 'error',
-        '@typescript-eslint/no-floating-promises': 'off',
-      },
-      parserOptions: {
-        parser: '@typescript-eslint/parser',
-        ecmaVersion: 12,
-        sourceType: 'module',
-        project: ['./tsconfig.json', './apps/**/tsconfig.json', './packages/**/tsconfig.json'],
-      },
-    },
-    {
-      files: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test|setup).[jt]s?(x)'],
-      rules: {
-        '@typescript-eslint/no-unsafe-call': 'off',
-        '@typescript-eslint/no-unsafe-member-access': 'off',
-      },
-      env: { jest: true },
-      extends: ['plugin:testing-library/react'],
-    },
-  ],
   settings: {
     'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
     'import/parsers': {
